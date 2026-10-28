@@ -69,6 +69,7 @@ docs/
   ARCHITEKTURA.md   mapování zadání na kód
   PROTOKOL.md       drátový protokol (signalizace + datová rovina)
   VPS_DEPLOYMENT.md nasazení bootstrap serveru na VPS
+  INSTALACE_KLIENTA.md instalace klienta (Windows/Linux/macOS/mobilní)
   TESTOVANI.md      testovací strategie a manuální smoke testy
   ROADMAP.md        fáze 1–5 a otevřené volby
 .github/workflows/ci.yml  fmt + clippy + test + build (win/linux/macos)
