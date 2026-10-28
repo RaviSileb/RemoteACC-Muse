@@ -41,5 +41,6 @@
 
 1. Produkční doména/VPS parametry a vlastnictví certifikátů.
 2. Vlastník GitHub repozitáře a politiky releasů.
-3. Flutter vs Tauri finální rozhodnutí pro desktop GUI.
+3. ~~Flutter vs Tauri finální rozhodnutí pro desktop GUI~~ — ROZHODNUTO: Flutter
+   (sdílený kód s Androidem, `clients/racc_app` + Windows platforma, viz `docs/GUI.md`).
 4. Rozsah auditních logů (právní požadavek vs minimalizace dat).

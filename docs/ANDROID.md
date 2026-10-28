@@ -61,6 +61,25 @@ flutter run
 Tipy: `adb logcat` pro logy, `flutter devtools` pro inspekci,
 `adb install -r` pro reinstalaci při zachování dat.
 
+## Přihlášení (admin)
+
+Aplikace po startu vyžaduje login `admin` + heslo. Ověření je lokální
+(sůl + SHA-256, `lib/auth.dart`) — brána aplikace, ne serverová
+autentizace. Kredence se do APK dostanou při buildu:
+
+```powershell
+flutter build apk --debug `
+  --dart-define=ADMIN_SALT=<64hex> --dart-define=ADMIN_HASH=<64hex>
+```
+
+kde `ADMIN_HASH = SHA-256 hex("ADMIN_SALT:heslo")`. Stejné heslo jako
+Windows GUI: vygenerujte jednou a použijte pro instalátor (`-AdminPassword`)
+i pro APK. Sůl+hash nikdy necommitujte do repa.
+
+E2E test loginu na zařízení: `adb shell input tap` do pole hesla,
+`adb shell input text <heslo>` (heslo bez diakritiky a mezer),
+`adb shell input keyevent 66`, kontrola screenshotem.
+
 ## Testy
 
 - `flutter analyze` v `clients/racc_app` — musí být bez nálezů.

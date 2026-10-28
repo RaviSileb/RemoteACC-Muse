@@ -72,6 +72,7 @@ deploy/
 docs/
   ARCHITEKTURA.md   mapování zadání na kód
   ANDROID.md        vývoj Android aplikace (cíl S23 Ultra)
+  GUI.md            GUI aplikace pro Windows (instalace, login)
   PROTOKOL.md       drátový protokol (signalizace + datová rovina)
   VPS_DEPLOYMENT.md nasazení bootstrap serveru na VPS
   INSTALACE_KLIENTA.md instalace klienta (Windows/Linux/macOS/mobilní)

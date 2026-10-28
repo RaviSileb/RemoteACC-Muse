@@ -1,25 +1,37 @@
 import 'package:ffi/ffi.dart';
 import 'package:flutter/material.dart';
 
+import 'login.dart';
 import 'racc_ffi.dart';
 
 void main() => runApp(const RaccApp());
 
-class RaccApp extends StatelessWidget {
+class RaccApp extends StatefulWidget {
   const RaccApp({super.key});
+
+  @override
+  State<RaccApp> createState() => _RaccAppState();
+}
+
+class _RaccAppState extends State<RaccApp> {
+  bool _loggedIn = false;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'RemoteACC',
       theme: ThemeData(colorSchemeSeed: Colors.indigo, useMaterial3: true),
-      home: const HomePage(),
+      home: _loggedIn
+          ? HomePage(onLogout: () => setState(() => _loggedIn = false))
+          : LoginScreen(onLogin: () => setState(() => _loggedIn = true)),
     );
   }
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({super.key, required this.onLogout});
+
+  final VoidCallback onLogout;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -84,7 +96,16 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('RemoteACC')),
+      appBar: AppBar(
+        title: const Text('RemoteACC'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            tooltip: 'Odhlásit',
+            onPressed: widget.onLogout,
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
