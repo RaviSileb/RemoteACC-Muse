@@ -172,6 +172,7 @@ fn load_identity(path: &Path) -> Result<Identity> {
 fn save_identity(id: &Identity, path: &Path) -> Result<()> {
     #[cfg(unix)]
     {
+        use std::io::Write as _;
         use std::os::unix::fs::OpenOptionsExt;
         std::fs::OpenOptions::new()
             .write(true)
