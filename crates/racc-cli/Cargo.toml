@@ -1,0 +1,28 @@
+[package]
+name = "racc-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "RemoteACC command-line agent: keygen, serve (TTY/file), connect, file transfer"
+
+[[bin]]
+name = "racc-cli"
+path = "src/main.rs"
+
+[dependencies]
+racc-core = { path = "../racc-core" }
+racc-tty = { path = "../racc-tty" }
+racc-av = { path = "../racc-av" }
+tokio = { version = "1", features = ["full"] }
+quinn = "0.11"
+clap = { version = "4", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+anyhow = "1"
+hex = "0.4"
+
+[dev-dependencies]
+tempfile = "3"

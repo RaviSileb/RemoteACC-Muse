@@ -1,0 +1,35 @@
+# RemoteACC – ukázková konfigurace (config.toml)
+# Zkopírujte do config.toml a upravte. Formát odpovídá kapitole 4 zadání.
+
+[bootstrap]
+host = "vps.example.com"
+port = 8443
+# SHA-256 fingerprint TLS certifikátu bootstrap serveru (TOFU při prvním připojení)
+pinned_fingerprint = ""
+
+[device]
+# Jedinečné ID zařízení; prázdné = vygeneruje se při prvním startu
+id = ""
+name = "muj-notebook"
+
+[security]
+# PIN pro párování nových zařízení (neukládat do repozitáře!)
+pairing_pin = ""
+# Důvěryhodné otisky protistran (Ed25519 fingerprinty, hex)
+trusted_fingerprints = []
+# Povolit TOFU (důvěřuj prvnímu připojení) místo striktního allowlistu
+tofu = true
+
+[performance]
+max_fps = 60
+# auto | av1 | hevc | h264 | vp9 | vp8
+codec = "auto"
+hw_accel = true
+# true = pouze přímé P2P, nikdy relay přes VPS
+direct_p2p_only = false
+
+[services]
+tty = true
+file_transfer = true
+video = false
+audio = false

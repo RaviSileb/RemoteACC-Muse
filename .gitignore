@@ -1,0 +1,9 @@
+/target
+**/target
+*.log
+.env
+*.key
+*_secret*
+.DS_Store
+Thumbs.db
+config.toml

@@ -1,0 +1,21 @@
+[Unit]
+Description=RemoteACC bootstrap/signaling server (QUIC)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=racc
+Group=racc
+ExecStart=/usr/local/bin/racc-bootstrapd --bind 0.0.0.0:8443 --dump-cert /etc/remoteacc/bootstrap.der
+# Vlastní certifikát místo ephemeral (DER):
+# ExecStart=/usr/local/bin/racc-bootstrapd --bind 0.0.0.0:8443 --cert /etc/remoteacc/cert.der --key /etc/remoteacc/key.der
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/etc/remoteacc
+
+[Install]
+WantedBy=multi-user.target

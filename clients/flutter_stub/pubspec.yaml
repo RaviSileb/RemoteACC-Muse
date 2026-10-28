@@ -1,0 +1,12 @@
+name: racc_flutter_stub
+description: Kostra Flutter klienta RemoteACC (fáze 4) – Dart FFI nad racc-core.
+version: 0.1.0
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  ffi: ^2.0.0
+
+dev_dependencies:
+  test: ^1.24.0
