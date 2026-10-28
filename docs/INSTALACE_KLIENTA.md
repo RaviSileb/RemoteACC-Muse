@@ -8,7 +8,36 @@ Grafické GUI (Flutter) vznikne ve fázi 4 — viz
 V celém návodu nahraďte `vps.example.com:8443` adresou vlastního
 bootstrap serveru ([nasazení na VPS](VPS_DEPLOYMENT.md)).
 
-## Varianta 1 – hotové binárky z CI (nejrychlejší)
+## Varianta 1 – release (doporučeno)
+
+### Windows (PowerShell)
+
+```powershell
+irm https://raw.githubusercontent.com/RaviSileb/RemoteACC-Muse/main/scripts/install.ps1 | iex
+```
+
+Skript stáhne `racc-cli` z nejnovějšího release, uloží do
+`~\.local\bin`, přidá do uživatelské PATH a ověří spuštění.
+Jiná verze: `-Version v0.1.0`. Bez změny PATH: `-NoPathUpdate`.
+
+### Linux / macOS
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/RaviSileb/RemoteACC-Muse/main/scripts/install.sh | bash
+```
+
+Instaluje do `~/.local/bin` (`INSTALL_DIR`), verzi volí
+`... | VERSION=v0.1.0 bash` (výchozí `latest`). Na macOS skript
+sám maže karanténu. Pro platformy bez hotové binárky (např. Intel
+Mac, Raspberry Pi) automaticky sestaví ze zdrojů (vyžaduje Rust).
+
+### Termux (Android)
+
+Stejný příkaz jako pro Linux — skript Termux pozná a sestaví
+`racc-cli` ze zdrojů (`pkg install rust git clang`, instalace do
+`$PREFIX/bin`). První instalace trvá několik minut.
+
+## Varianta 2 – hotové binárky z CI
 
 CI staví `racc-cli` pro Windows, Linux i macOS při každém push/PR
 ([ci.yml](../.github/workflows/ci.yml), job `build-release`).
@@ -30,7 +59,7 @@ Binárka je `racc-cli` (`racc-cli.exe` na Windows). Ověření:
 ./racc-bin/racc-cli --help
 ```
 
-## Varianta 2 – sestavení ze zdrojů
+## Varianta 3 – sestavení ze zdrojů
 
 Požadavky společné: Git a Rust 1.77+ (edice 2021):
 

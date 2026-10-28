@@ -1,0 +1,62 @@
+name: release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+env:
+  REPO: RaviSileb/RemoteACC-Muse
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            asset: racc-cli-windows-x86_64.zip
+          - os: ubuntu-latest
+            asset: racc-cli-linux-x86_64.tar.gz
+          - os: macos-latest
+            asset: racc-cli-macos-arm64.tar.gz
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo build --release -p racc-cli
+      - name: Package (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: Compress-Archive -Path target\release\racc-cli.exe -DestinationPath ${{ matrix.asset }}
+      - name: Package (unix)
+        if: runner.os != 'Windows'
+        run: tar czf ${{ matrix.asset }} -C target/release racc-cli
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.asset }}
+          path: ${{ matrix.asset }}
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+      - name: Checksums and GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd dist
+          sha256sum * > SHA256SUMS.txt
+          TAG="${GITHUB_REF_NAME}"
+          NOTES="RemoteACC CLI ${TAG}: racc-cli pro Windows (PowerShell), Linux a macOS. Instalace: scripts/install.ps1 a scripts/install.sh (Termux sestaví ze zdrojů)."
+          if gh release view "$TAG" -R "$REPO" >/dev/null 2>&1; then
+            gh release upload "$TAG" -R "$REPO" --clobber *
+          else
+            gh release create "$TAG" -R "$REPO" --title "RemoteACC CLI $TAG" --notes "$NOTES" *
+          fi

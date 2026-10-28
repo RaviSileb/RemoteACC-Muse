@@ -62,6 +62,9 @@ crates/
   racc-cli/         CLI agent a klient
 clients/
   flutter_stub/     kostra Flutter klienta + Dart FFI kontrakt
+scripts/
+  install.ps1       instalátor racc-cli pro Windows (PowerShell)
+  install.sh        instalátor pro Linux/macOS/Termux
 deploy/
   Dockerfile        multi-stage build bootstrap serveru
   bootstrapd.service systemd unit pro VPS
@@ -72,7 +75,8 @@ docs/
   INSTALACE_KLIENTA.md instalace klienta (Windows/Linux/macOS/mobilní)
   TESTOVANI.md      testovací strategie a manuální smoke testy
   ROADMAP.md        fáze 1–5 a otevřené volby
-.github/workflows/ci.yml  fmt + clippy + test + build (win/linux/macos)
+.github/workflows/ci.yml       fmt + clippy + test + build (win/linux/macos)
+.github/workflows/release.yml  tag v* → GitHub release s racc-cli
 ```
 
 ## Vývoj
