@@ -25,3 +25,6 @@ racc.isValidUri('racc://vps:8443/pc#fp'); // true/false
 `lib/racc_ffi.dart` pokrývá: `racc_version`, `racc_identity_generate`,
 `racc_fingerprint_of`, `racc_uri_parse`, `racc_uri_is_valid`,
 `racc_free_string`. Všechny vrácené řetězce se uvolňují automaticky.
+
+Funkční aplikaci postavenou na tomto kontraktu viz
+[../racc_app](../racc_app/) a [docs/ANDROID.md](../../docs/ANDROID.md).

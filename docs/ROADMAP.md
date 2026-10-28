@@ -25,7 +25,8 @@
 
 ## Fáze 4 – Mobilní klienti + NAT traversal 🔲
 
-- [ ] Flutter GUI (Android/iOS) nad C-ABI (`ffi.rs` + `clients/flutter_stub`)
+- [x] Flutter kostra + FFI + APK pro S23 Ultra (`clients/racc_app`, viz `docs/ANDROID.md`)
+- [ ] Plný mobilní klient (TTY, soubory, video) a iOS build
 - [ ] ICE STUN/TURN hole-punching (`webrtc-rs`), TURN relay proudu
       místo mailboxu; TCP/TLS 1.3 fallback
 - [ ] MediaProjection/ReplayKit, AccessibilityService vstup

@@ -62,6 +62,7 @@ crates/
   racc-cli/         CLI agent a klient
 clients/
   flutter_stub/     kostra Flutter klienta + Dart FFI kontrakt
+  racc_app/         Android aplikace (Flutter UI + FFI, APK pro S23 Ultra)
 scripts/
   install.ps1       instalátor racc-cli pro Windows (PowerShell)
   install.sh        instalátor pro Linux/macOS/Termux
@@ -70,6 +71,7 @@ deploy/
   bootstrapd.service systemd unit pro VPS
 docs/
   ARCHITEKTURA.md   mapování zadání na kód
+  ANDROID.md        vývoj Android aplikace (cíl S23 Ultra)
   PROTOKOL.md       drátový protokol (signalizace + datová rovina)
   VPS_DEPLOYMENT.md nasazení bootstrap serveru na VPS
   INSTALACE_KLIENTA.md instalace klienta (Windows/Linux/macOS/mobilní)

@@ -175,17 +175,15 @@ Volitelná (CLI přepínače mají přednost). Vzor:
   `direct_p2p_only`; které služby agent nabízí (`tty`, `file_transfer`,
   `video`, `audio`).
 
-## Android / iOS (výhled, fáze 4)
+## Android (nativní aplikace) / iOS (výhled)
 
-Plný mobilní klient zatím není — hotový je FFI kontrakt
-(`racc-core` jako `cdylib` + Dart vazby, viz stub výše):
+Pro Android existuje Flutter aplikace [clients/racc_app](../clients/racc_app/README.md)
+— funkční kostra (verze jádra, identita, `racc://` URI) s APK pro Galaxy S23 Ultra.
+Sestavení, instalace přes `adb` a vývojový běh: [docs/ANDROID.md](ANDROID.md).
+Plný klient (TTY, soubory, video) je fáze 4.
 
-```sh
-# Android (vyžaduje Android NDK + cargo-ndk):
-cargo ndk -t arm64-v8a -o clients/flutter_stub/android/libs \
-  build --release -p racc-core
-# iOS: cargo-lipo / xcframework dle docs/ROADMAP.md (fáze 4)
-```
+iOS: zatím jen FFI kontrakt (`racc-core` jako `cdylib` + Dart vazby);
+build přes cargo-lipo / xcframework dle [ROADMAP](ROADMAP.md).
 
 Platformní omezení (dle zadání): na Androidu běží agent i klient,
 na iOS **jen klient** (systém nedovolí PTY server ani zachytávání
